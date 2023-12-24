@@ -1,3 +1,4 @@
+// AddCard.js: Component for adding a new card to a deck
 import React, { useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { readDeck, createCard } from "../../utils/api";
@@ -7,6 +8,7 @@ function AddCard({ deck, setDeck, card, setCard }) {
   const history = useHistory();
   const { deckId } = useParams();
 
+  // Load the deck data when the component mounts
   useEffect(() => {
     async function loadDecks() {
       const loadedDeck = await readDeck(deckId);
@@ -15,18 +17,22 @@ function AddCard({ deck, setDeck, card, setCard }) {
     loadDecks();
   }, [deckId, setDeck]);
 
+  // Update the card's front value on input change
   function changeFront(e) {
     setCard({ ...card, front: e.target.value });
   }
 
+  // Update the card's back value on input change
   function changeBack(e) {
     setCard({ ...card, back: e.target.value });
   }
 
+  // Redirect to the deck view page after adding a card
   function handleDone() {
     history.push(`/decks/${deck.id}`);
   }
 
+  // Save the card to the deck and reset the card state
   function handleSave(e) {
     e.preventDefault();
     async function updateCard() {
@@ -40,8 +46,10 @@ function AddCard({ deck, setDeck, card, setCard }) {
     });
   }
 
+  // Render the AddCard component
   return (
     <div>
+      {/* Breadcrumb navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
           <li className="breadcrumb-item">
@@ -55,6 +63,7 @@ function AddCard({ deck, setDeck, card, setCard }) {
           </li>
         </ol>
       </nav>
+      {/* Form for adding a new card */}
       <div>
         <h1>{deck.name}: Add Card</h1>
         <CardForm
@@ -71,3 +80,4 @@ function AddCard({ deck, setDeck, card, setCard }) {
 }
 
 export default AddCard;
+

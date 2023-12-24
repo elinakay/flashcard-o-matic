@@ -1,3 +1,4 @@
+// CardForm.js: Component for rendering a form to create or edit a flashcard
 import React from "react";
 
 function CardForm({
@@ -8,6 +9,7 @@ function CardForm({
   cardValueFront,
   cardValueBack,
 }) {
+  // Render a form for creating or editing a flashcard
   return (
     <form>
       <div className="mb-3">
@@ -54,3 +56,4 @@ function CardForm({
 }
 
 export default CardForm;
+

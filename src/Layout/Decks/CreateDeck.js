@@ -1,3 +1,4 @@
+// CreateDeck.js: Component for creating a new deck
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createDeck } from "../../utils/api";
@@ -6,27 +7,33 @@ const CreateDeck = () => {
   const history = useHistory();
   const [newDeck, setNewDeck] = useState();
 
+  // Handle form submission to create a new deck
   async function handleSubmit(e) {
     e.preventDefault();
     const res = await createDeck(newDeck);
     history.push(`/decks/${res.id}`);
   }
 
+  // Handle input change for deck name
   const handleNameChange = (e) => {
     setNewDeck({ ...newDeck, name: e.target.value });
   };
 
+  // Handle input change for deck description
   const handleDescriptionChange = (e) => {
     setNewDeck({ ...newDeck, description: e.target.value });
   };
 
+  // Handle cancel button click
   const handleCancel = (e) => {
     e.preventDefault();
     history.push("/");
   };
 
+  // Render the CreateDeck component
   return (
     <div className="create-deck">
+      {/* Breadcrumb navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
           <li className="breadcrumb-item">
@@ -77,3 +84,4 @@ const CreateDeck = () => {
 };
 
 export default CreateDeck;
+

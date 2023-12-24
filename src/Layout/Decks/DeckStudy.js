@@ -1,3 +1,4 @@
+// DeckStudy.js: Component for studying a deck
 import React, { useEffect, useState } from "react";
 import { readDeck } from "../../utils/api";
 import { useParams, Link } from "react-router-dom";
@@ -9,6 +10,7 @@ function DeckStudy() {
   const [error, setError] = useState(undefined);
   const { deckId } = useParams();
 
+  // Load deck data when the component mounts
   useEffect(() => {
     const abortController = new AbortController();
     readDeck(deckId, abortController.signal).then(setDeck).catch(setError);
@@ -16,10 +18,10 @@ function DeckStudy() {
     return () => abortController.abort();
   }, [deckId]);
 
-  console.log(useParams());
-
+  // Render the DeckStudy component
   return (
     <div className="deck-study">
+      {/* Breadcrumb navigation */}
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
           <li className="breadcrumb-item">
@@ -34,6 +36,7 @@ function DeckStudy() {
         </ol>
       </nav>
       <h2>{deck.name}: Study</h2>
+      {/* Render the Card component if there are enough cards, otherwise render NotEnoughCards component */}
       {deck?.cards?.length >= 3 ? (
         <Card deck={deck} />
       ) : (
@@ -44,3 +47,4 @@ function DeckStudy() {
 }
 
 export default DeckStudy;
+

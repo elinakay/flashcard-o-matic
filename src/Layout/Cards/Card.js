@@ -1,3 +1,4 @@
+// Card.js: Component for displaying and navigating flashcards
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
@@ -6,6 +7,7 @@ function Card({ deck }) {
   const [index, setIndex] = useState(0);
   const history = useHistory();
 
+  // Handle advancing to the next card or restarting the deck
   const handleNext = () => {
     if (index !== deck.cards.length - 1) {
       setIndex(index + 1);
@@ -23,10 +25,12 @@ function Card({ deck }) {
     }
   };
 
+  // Handle flipping the flashcard to the other side
   const handleFlip = () => {
     setCardSide(!cardSide);
   };
 
+  // Render the Card component
   return (
     <div className="row">
       <div className="col-sm-6">
@@ -59,3 +63,4 @@ function Card({ deck }) {
 }
 
 export default Card;
+

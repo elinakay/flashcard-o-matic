@@ -1,3 +1,4 @@
+// Deck.js: Component for rendering details of a deck
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { deleteDeck } from "../../utils/api";
@@ -5,6 +6,7 @@ import { deleteDeck } from "../../utils/api";
 export const Deck = ({ deck }) => {
   const history = useHistory();
 
+  // Handle deck deletion
   const handleDelete = async (id) => {
     const result = window.confirm(
       "Delete this card? You will not be able to recover it."
@@ -16,6 +18,7 @@ export const Deck = ({ deck }) => {
     }
   };
 
+  // Render the Deck component
   return (
     <div className="row">
       <div className="col-sm-6">
@@ -54,3 +57,4 @@ export const Deck = ({ deck }) => {
 };
 
 export default Deck;
+

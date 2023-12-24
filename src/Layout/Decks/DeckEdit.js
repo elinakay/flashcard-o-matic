@@ -1,3 +1,4 @@
+// DeckEdit.js: Component for editing the details of a deck
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { readDeck, updateDeck } from "../../utils/api";
@@ -7,6 +8,7 @@ function DeckEdit() {
   const { deckId } = useParams();
   const [deck, setDeck] = useState({});
 
+  // Load deck data when the component mounts
   useEffect(() => {
     async function loadDecks() {
       const loadedDeck = await readDeck(deckId);
@@ -15,26 +17,32 @@ function DeckEdit() {
     loadDecks();
   }, [deckId, setDeck]);
 
+  // Handle input change for deck name
   function changeName(event) {
     setDeck({ ...deck, name: event.target.value });
   }
 
+  // Handle input change for deck description
   function changeDesc(event) {
     setDeck({ ...deck, description: event.target.value });
   }
 
+  // Save the updated deck and redirect to the deck view
   function saveHandler(event) {
     event.preventDefault();
     updateDeck(deck).then((response) => history.push(`/decks/${deck.id}`));
   }
 
+  // Handle cancel button click
   function handleCancel() {
     history.push(`/decks/${deck.id}`);
   }
 
+  // Render the DeckEdit component
   return (
     <div>
       <div>
+        {/* Breadcrumb navigation */}
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
@@ -96,3 +104,4 @@ function DeckEdit() {
 }
 
 export default DeckEdit;
+

@@ -1,3 +1,4 @@
+// DeckView.js: Component for viewing the details of a deck
 import React, { useEffect, useState } from "react";
 import { useHistory, Link, useParams } from "react-router-dom";
 import { deleteCard, deleteDeck, readDeck } from "../../utils/api";
@@ -7,6 +8,7 @@ function DeckView() {
   const { deckId } = useParams();
   const history = useHistory();
 
+  // Load deck data when the component mounts
   useEffect(() => {
     async function getDeck() {
       const currentDeck = await readDeck(deckId);
@@ -15,10 +17,12 @@ function DeckView() {
     getDeck();
   }, [deckId]);
 
+  // Redirect to not found page if deck doesn't exist
   if (!deck) {
     return <h1>Loading...</h1>;
   }
 
+  // Handle deck and card deletion
   const handleDeleteDeck = (deckId) => {
     const deleted = window.confirm(
       "Are you sure you want to delete this deck?"
@@ -39,8 +43,7 @@ function DeckView() {
     }
   };
 
-  console.log(deck);
-
+  // Map each card to a Card component
   const list = deck.cards.map((card) => {
     return (
       <div className="card w-50" key={card.id}>
@@ -72,10 +75,12 @@ function DeckView() {
     );
   });
 
+  // Render the DeckView component
   return (
     <>
       <div>
         <div>
+          {/* Breadcrumb navigation */}
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
@@ -92,6 +97,7 @@ function DeckView() {
             <h5 className="deck-view-name">{deck.name}</h5>
             <p className="deck-view-description">{deck.description}</p>
             <span className="d-flex">
+              {/* Navigation buttons */}
               <Link
                 to={`/decks/${deck.id}/edit`}
                 className="btn btn-secondary"
@@ -133,3 +139,4 @@ function DeckView() {
 }
 
 export default DeckView;
+

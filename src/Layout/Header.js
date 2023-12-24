@@ -1,6 +1,8 @@
+// Header.js: Component for rendering the application header
 import React from "react";
 
 function Header() {
+  // Render the Header component
   return (
     <header className="jumbotron bg-dark">
       <div className="container text-white">
@@ -12,3 +14,4 @@ function Header() {
 }
 
 export default Header;
+
